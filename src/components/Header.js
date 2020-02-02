@@ -1,18 +1,43 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
-// import GoogleAuth from "./GoogleAuth";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../actions/auth";
 
-const Header = () => {
+const Header = props => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(state => !!state.auth.userId);
+  const logoutHandler = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
+
   return (
-    <div className="ui secondary pointing menu">
-      <Link to="/" className="item">
-        Comics
-      </Link>
-      <div className="right menu">
-        <Link to="/" className="item">
-          All Comics
+    <div className={props.className}>
+      <div className="left menu">
+        <Link to="/">
+          <button className="ui button">All Comics</button>
         </Link>
-        {/* <GoogleAuth /> */}
+        {isLoggedIn && (
+          <Link to="/favorite">
+            <button className="ui primary button">Favorites</button>
+          </Link>
+        )}
+      </div>
+
+      <div className="right menu">
+        {isLoggedIn ? (
+          <Link onClick={logoutHandler}>
+            <button className="ui button">Logout</button>
+          </Link>
+        ) : (
+          <>
+            <Link to="/login">
+              <button className="ui button">Login</button>
+            </Link>
+            <Link to="/signup">
+              <button className="ui primary button">Register</button>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

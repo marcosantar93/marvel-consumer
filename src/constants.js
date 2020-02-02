@@ -1,0 +1,1 @@
+export const COMICS_PER_PAGE = 10;

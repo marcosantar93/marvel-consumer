@@ -3,3 +3,8 @@ export const FETCH_COMIC = "FETCH_COMIC";
 
 export const AUTHENTICATE = "AUTHENTICATE";
 export const LOGOUT = "LOGOUT";
+
+export const DELETE_FAVORITE = "DELETE_FAVORITE";
+export const CREATE_FAVORITE = "CREATE_FAVORITE";
+export const FETCH_FAVORITES = "FETCH_FAVORITES";
+export const FETCH_FAVORITE = "FETCH_FAVORITE";
